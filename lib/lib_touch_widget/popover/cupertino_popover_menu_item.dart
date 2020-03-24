@@ -11,7 +11,7 @@ class CupertinoPopoverMenuList extends StatelessWidget {
       shrinkWrap: true,
       itemBuilder: (context, int i) {
         if (i.isOdd) {
-          // 在每一列之前，添加一个1像素高的分隔线widget
+          // before each column, add a 1 pixel high divider widget
           return const Divider(
             height: 1.0,
           );

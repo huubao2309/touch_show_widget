@@ -7,7 +7,7 @@ class _WidgetUtil {
   double _height;
 
   /// Widget rendering listener.
-  /// Widget渲染监听.
+  /// Widget rendering listener.
   /// context: Widget context.
   /// isOnce: true,Continuous monitoring  false,Listen only once.
   /// onCallBack: Widget Rect CallBack.
@@ -29,7 +29,7 @@ class _WidgetUtil {
     });
   }
 
-  /// Widget渲染监听.
+  /// Widget rendering listener
   void asyncPrepares(bool isOnce, ValueChanged<Rect> onCallBack) {
     if (_hasMeasured) return;
     WidgetsBinding.instance.addPostFrameCallback((Duration timeStamp) {
@@ -38,8 +38,8 @@ class _WidgetUtil {
     });
   }
 
-  ///get Widget Bounds (width, height, left, top, right, bottom and so on).Widgets must be rendered completely.
-  ///获取widget Rect
+  /// get Widget Bounds (width, height, left, top, right, bottom and so on).Widgets must be rendered completely.
+  /// Get widget Rect
   static Rect getWidgetBounds(BuildContext context) {
     RenderBox box = context.findRenderObject();
     return (box != null && box.semanticBounds != null)
@@ -47,8 +47,8 @@ class _WidgetUtil {
         : Rect.zero;
   }
 
-  ///Get the coordinates of the widget on the screen.Widgets must be rendered completely.
-  ///获取widget在屏幕上的坐标,widget必须渲染完成
+  /// Get the coordinates of the widget on the screen.Widgets must be rendered completely.
+  /// Get the coordinates of the widget on the screen, the widget must be rendered
   static Offset getWidgetLocalToGlobal(BuildContext context) {
     RenderBox box = context.findRenderObject();
     return box == null ? Offset.zero : box.localToGlobal(Offset.zero);

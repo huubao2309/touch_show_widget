@@ -38,7 +38,7 @@ class CupertinoPopoverButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onTap: () {
+      onLongPress: () {
         if (onTap != null && onTap()) {
           return;
         }
@@ -142,9 +142,9 @@ class CupertinoPopoverState extends State<CupertinoPopover>
   static const double _arrowWidth = 12.0;
   static const double _arrowHeight = 8.0;
 
-//  AnimationController animation;
+  // AnimationController animation;
 
-  /// 是否箭头向上
+  /// Whether the arrow is up
   bool isArrowUp;
 
   @override
@@ -252,13 +252,13 @@ class _CupertionPopoverPositionRenderObject extends RenderShiftedBox {
     if (attachRect.left > size.width / 2 &&
         _ScreenUtil.getInstance().screenWidth - attachRect.right >
             size.width / 2) {
-      //判断是否可以在中间
+      // Determine if it can be in the middle
       bodyLeft = attachRect.left + attachRect.width / 2 - size.width / 2;
     } else if (attachRect.left < size.width / 2) {
-      //靠左
+      // left
       bodyLeft = 10.0;
     } else {
-      //靠右
+      // Right
       bodyLeft = _ScreenUtil.getInstance().screenWidth - 10.0 - size.width;
     }
 
@@ -371,7 +371,7 @@ class _CupertionPopoverContextRenderObject extends RenderShiftedBox {
   @override
   void paint(PaintingContext context, Offset offset) {
     Matrix4 transform = Matrix4.identity();
-//
+
     var isArrowUp = _ScreenUtil.getInstance().screenHeight >
         attachRect.bottom + size.height + CupertinoPopoverState._arrowHeight;
 
@@ -409,45 +409,49 @@ class _CupertionPopoverContextRenderObject extends RenderShiftedBox {
     Path path = new Path();
 
     if (isArrowUp) {
-      path.moveTo(arrowRect.left, arrowRect.bottom); //箭头
+      path.moveTo(arrowRect.left, arrowRect.bottom); // arrow
       path.lineTo(arrowRect.left + arrowRect.width / 2, arrowRect.top);
       path.lineTo(arrowRect.right, arrowRect.bottom);
 
-      path.lineTo(bodyRect.right - radius, bodyRect.top); //右上角
+      path.lineTo(bodyRect.right - radius, bodyRect.top); // upper right corner
       path.conicTo(bodyRect.right, bodyRect.top, bodyRect.right,
           bodyRect.top + radius, 1.0);
 
-      path.lineTo(bodyRect.right, bodyRect.bottom - radius); //右下角
+      path.lineTo(
+          bodyRect.right, bodyRect.bottom - radius); // bottom right corner
       path.conicTo(bodyRect.right, bodyRect.bottom, bodyRect.right - radius,
           bodyRect.bottom, 1.0);
 
-      path.lineTo(bodyRect.left + radius, bodyRect.bottom); //左下角
+      path.lineTo(
+          bodyRect.left + radius, bodyRect.bottom); // bottom left corner
       path.conicTo(bodyRect.left, bodyRect.bottom, bodyRect.left,
           bodyRect.bottom - radius, 1.0);
 
-      path.lineTo(bodyRect.left, bodyRect.top + radius); //左上角
+      path.lineTo(bodyRect.left, bodyRect.top + radius); // upper left corner
       path.conicTo(bodyRect.left, bodyRect.top, bodyRect.left + radius,
           bodyRect.top, 1.0);
     } else {
       path.moveTo(bodyRect.left + radius, bodyRect.top);
 
-      path.lineTo(bodyRect.right - radius, bodyRect.top); //右上角
+      path.lineTo(bodyRect.right - radius, bodyRect.top); // upper right corner
       path.conicTo(bodyRect.right, bodyRect.top, bodyRect.right,
           bodyRect.top + radius, 1.0);
 
-      path.lineTo(bodyRect.right, bodyRect.bottom - radius); //右下角
+      path.lineTo(
+          bodyRect.right, bodyRect.bottom - radius); // bottom right corner
       path.conicTo(bodyRect.right, bodyRect.bottom, bodyRect.right - radius,
           bodyRect.bottom, 1.0);
 
-      path.lineTo(arrowRect.right, arrowRect.top); //箭头
+      path.lineTo(arrowRect.right, arrowRect.top); // arrow
       path.lineTo(arrowRect.left + arrowRect.width / 2, arrowRect.bottom);
       path.lineTo(arrowRect.left, arrowRect.top);
 
-      path.lineTo(bodyRect.left + radius, bodyRect.bottom); //左下角
+      path.lineTo(
+          bodyRect.left + radius, bodyRect.bottom); // bottom left corner
       path.conicTo(bodyRect.left, bodyRect.bottom, bodyRect.left,
           bodyRect.bottom - radius, 1.0);
 
-      path.lineTo(bodyRect.left, bodyRect.top + radius); //左上角
+      path.lineTo(bodyRect.left, bodyRect.top + radius); // upper left corner
       path.conicTo(bodyRect.left, bodyRect.top, bodyRect.left + radius,
           bodyRect.top, 1.0);
     }
